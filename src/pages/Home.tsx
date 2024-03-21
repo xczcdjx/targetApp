@@ -8,7 +8,9 @@ import Account from "./home/Account.tsx";
 import {navigator} from "../constants";
 const topBtn=(t:string)=>({
     headerRight: () => (
-        <Text style={{color:'orangered'}}>语言</Text>
+        <Text style={{color:'#fff',marginRight:15}} onPress={()=>{
+            console.log(111)
+        }}>语言</Text>
     ),
     title:t,
     navigationBarHidden: true,
