@@ -1,16 +1,18 @@
 import React from "react";
-import {Button, Text} from "react-native";
+import {Text} from "react-native";
 import {useNavigation} from "@react-navigation/native";
-
+import {Button} from "@ui-kitten/components";
 const Login = () => {
     const navigate=useNavigation()
     return (
         <>
             <Text>111</Text>
-            <Button title={'goHome'} onPress={()=>{
+            <Button onPress={()=>{
                 // @ts-ignore
                 navigate.popTo('Home')
-            }}/>
+            }}>
+                goHome
+            </Button>
         </>
     );
 };

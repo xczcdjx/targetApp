@@ -1,10 +1,14 @@
 import {Text} from "react-native";
+import SafeView from "../../layout/SafeView.tsx";
+import React from "react";
 
 const Explain = () => {
     return (
-        <>
-            <Text>说明</Text>
-        </>
+        <SafeView>
+            <>
+
+            </>
+        </SafeView>
     );
 };
 export default Explain

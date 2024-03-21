@@ -3,7 +3,8 @@ import Login from "../pages/Login.tsx";
 import Home from "../pages/Home.tsx";
 import {navigator} from "../constants";
 
-const routes = createNativeStackNavigator({
+const router = createNativeStackNavigator({
+    initialRouteName:'Home',
     screens:{
         Login:{
             screen:Login,
@@ -62,4 +63,4 @@ const routes = createNativeStackNavigator({
     </Stack.Navigator>
 }*/
 
-export default routes
+export default router
