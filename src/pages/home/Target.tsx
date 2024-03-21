@@ -1,6 +1,5 @@
 import {Button, ScrollView, StatusBar, Text, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
-import SafeView from "../../layout/SafeView.tsx";
 import {Tab, TabBar} from "@ui-kitten/components";
 import React, {useState} from "react";
 interface BarProps {
