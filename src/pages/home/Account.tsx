@@ -1,5 +1,4 @@
 import {Text} from "react-native";
-
 const Account = () => {
     return (
         <>
