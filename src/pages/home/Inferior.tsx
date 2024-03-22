@@ -1,16 +1,18 @@
 import {Clipboard, Dimensions, ScrollView, StyleSheet, Text, View} from "react-native";
 import React, {Component, FC, useState} from "react";
 import SafeView from "@/layout/SafeView.tsx";
-import {Button, Input, Tab, TabBar} from "@ui-kitten/components";
+import {Button, Card, Icon, Input, Modal, Tab, TabBar} from "@ui-kitten/components";
 import {GeneStyle} from "@/utils/style.ts";
+import {Text as UText} from '@ui-kitten/components'
 const ITargetData:ITargetProps[]=[
     ...Array(30).fill(0).map((_,i)=>({
         id:i+1,
         acc:'Millie Gregory'+i,
-        num:Math.floor(Math.random()*1000+1)
+        num:Math.floor(Math.random()*1000+1),
+        fb:'qwepoi'+i,
+        youtube:'zxcvbnm'+(i+888)
     }))
 ]
-
 class Duplicate extends Component{
     state={
         text:''
@@ -34,6 +36,7 @@ class Duplicate extends Component{
 }
 const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
     const keys=['acc','num','d1','d2']
+    const [visible, setVisible] = React.useState(false);
     const sty=GeneStyle({
         con:{
             margin:10,
@@ -66,10 +69,32 @@ const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
         },
         t2:{
             backgroundColor:'#f8f8f8'
+        },
+        modal:{
+            height:200,
+            width:200
+        },
+        modalClose:{
+            width:25,
+            height:25,
+            position:'absolute',
+            right:-15,
+            top:-5
+        },
+        modelT:{
+            marginTop:30
         }
     })
-    const goDetail = (i:string|number,d:string) => {
-        console.log(i,d)
+    const [accountD,setAccountD]=useState<Pick<ITargetProps, 'fb'|'youtube'>>({})
+    const goDetail = (i:string|number,t:string) => {
+        switch (t as 'd1'|'d2') {
+            case "d1":
+                setAccountD(d.find(it=>it.id===i)!)
+                return setVisible(true)
+            case "d2":
+
+                return;
+        }
     }
     return (
         <View style={sty.con}>
@@ -93,6 +118,28 @@ const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
         <View style={[sty.t,sty.t1]}>
             <Text>总计：  {d.reduce((p,c)=>p+=c.num,0)} THB</Text>
         </View>
+            <Modal
+                visible={visible}
+                backdropStyle={{backgroundColor:'rgba(0, 0, 0, 0.5)'}}
+                onBackdropPress={() => setVisible(false)}
+            >
+                <Card disabled={true} style={sty.modal}>
+                    <Icon
+                        style={sty.modalClose}
+                        fill='#8F9BB3'
+                        name='close-circle-outline'
+                        onPress={()=>setVisible(false)}
+                    />
+                    <View style={sty.modelT}>
+                        <UText status={'info'}>FB: </UText>
+                        <Text numberOfLines={2}>{accountD.fb}</Text>
+                    </View>
+                    <View style={{marginTop:15}}>
+                        <UText status={'info'}>youtube: </UText>
+                        <Text numberOfLines={2}>{accountD.youtube}</Text>
+                    </View>
+                </Card>
+            </Modal>
     </View>)
 }
 const InferiorMain = () => {

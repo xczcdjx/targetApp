@@ -25,7 +25,7 @@ const router = createNativeStackNavigator({
                 headerShown:false,
                 statusBarBackgroundColor:navigator.background,
                 // statusBarTranslucent:true,
-                statusBarHidden:true
+                // statusBarHidden:true
             }
         },
     }

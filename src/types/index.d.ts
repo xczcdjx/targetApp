@@ -4,5 +4,7 @@ declare global{
         id:string|number
         acc:string,
         num:number,
+        fb?:string
+        youtube?:string
     }
 }

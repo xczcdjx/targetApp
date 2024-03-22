@@ -1,14 +1,17 @@
 import {createStaticNavigation} from "@react-navigation/native";
 import * as eva from '@eva-design/eva';
 import router from "./src/router";
-import {ApplicationProvider} from "@ui-kitten/components";
+import {ApplicationProvider, IconRegistry} from "@ui-kitten/components";
+import {EvaIconsPack} from "@ui-kitten/eva-icons";
 // @ts-ignore
 const Navigation = createStaticNavigation(router);
 function App() {
-    return (
+    return (<>
+        <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={eva.light}>
             <Navigation/>
         </ApplicationProvider>
+        </>
     );
 }
 
