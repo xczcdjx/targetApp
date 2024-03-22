@@ -1,3 +1,5 @@
+import React from "react";
+
 export {}
 declare global{
     interface ITargetProps {
@@ -6,5 +8,8 @@ declare global{
         num:number,
         fb?:string
         youtube?:string
+    }
+    type RCT={
+        children:React.ReactNode
     }
 }

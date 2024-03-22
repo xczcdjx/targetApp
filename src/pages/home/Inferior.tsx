@@ -4,6 +4,7 @@ import SafeView from "@/layout/SafeView.tsx";
 import {Button, Card, Icon, Input, Modal, Tab, TabBar} from "@ui-kitten/components";
 import {GeneStyle} from "@/utils/style.ts";
 import {Text as UText} from '@ui-kitten/components'
+import {useNavigation} from "@react-navigation/native";
 const ITargetData:ITargetProps[]=[
     ...Array(30).fill(0).map((_,i)=>({
         id:i+1,
@@ -35,6 +36,7 @@ class Duplicate extends Component{
     }
 }
 const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
+    const navigation=useNavigation()
     const keys=['acc','num','d1','d2']
     const [visible, setVisible] = React.useState(false);
     const sty=GeneStyle({
@@ -86,13 +88,14 @@ const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
         }
     })
     const [accountD,setAccountD]=useState<Pick<ITargetProps, 'fb'|'youtube'>>({})
-    const goDetail = (i:string|number,t:string) => {
+    const goDetail = (id:string|number,t:string) => {
         switch (t as 'd1'|'d2') {
             case "d1":
-                setAccountD(d.find(it=>it.id===i)!)
+                setAccountD(d.find(it=>it.id===id)!)
                 return setVisible(true)
             case "d2":
-
+                // @ts-ignore
+                navigation.navigate('InferiorD',{id})
                 return;
         }
     }

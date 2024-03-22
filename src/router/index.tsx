@@ -2,21 +2,25 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import Login from "../pages/Login.tsx";
 import Home from "../pages/Home.tsx";
 import {navigator} from "../constants";
-
+import InferiorDetail from "../pages/Inferior/InferiorDetail.tsx";
+const topBtn=(t:string)=>({
+    title:t,
+    navigationBarHidden: true,
+    autoHideHomeIndicator: true,
+    statusBarBackgroundColor:navigator.background,
+    headerStyle: {
+        backgroundColor: navigator.background,
+    },
+    headerTitleAlign: 'center',
+    headerTintColor: '#fff',
+})
 const router = createNativeStackNavigator({
     initialRouteName:'Home',
     screens:{
         Login:{
             screen:Login,
             options:{
-                statusBarBackgroundColor:navigator.background,
-                statusBarHidden:true,
-                autoHideHomeIndicator: true,
-                headerStyle: {
-                    backgroundColor: navigator.background,
-                },
-                headerTintColor: '#fff',
-                headerTitleAlign: 'center'
+                ...topBtn('登录') as any
             }
         },
         Home:{
@@ -28,6 +32,12 @@ const router = createNativeStackNavigator({
                 // statusBarHidden:true
             }
         },
+        InferiorD:{
+            screen:InferiorDetail,
+            options:{
+                ...topBtn('下级详情') as any
+            }
+        }
     }
 });
 // 原始路由栈信息
