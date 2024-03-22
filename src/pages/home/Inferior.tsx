@@ -1,7 +1,16 @@
-import {Clipboard, Text, View} from "react-native";
-import {Component} from "react";
+import {Clipboard, Dimensions, ScrollView, StyleSheet, Text, View} from "react-native";
+import React, {Component, FC, useState} from "react";
 import SafeView from "@/layout/SafeView.tsx";
-import {Button, Input} from "@ui-kitten/components";
+import {Button, Input, Tab, TabBar} from "@ui-kitten/components";
+import {GeneStyle} from "@/utils/style.ts";
+const ITargetData:ITargetProps[]=[
+    ...Array(30).fill(0).map((_,i)=>({
+        id:i+1,
+        acc:'Millie Gregory'+i,
+        num:Math.floor(Math.random()*1000+1)
+    }))
+]
+
 class Duplicate extends Component{
     state={
         text:''
@@ -23,10 +32,99 @@ class Duplicate extends Component{
         </View>
     }
 }
+const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
+    const keys=['acc','num','d1','d2']
+    const sty=GeneStyle({
+        con:{
+            margin:10,
+            height:500,
+            // borderColor:'orange',
+            // borderWidth:1
+        },
+        t:{
+            height:40,
+            padding:5,
+            display:'flex',
+            flexDirection:'row',
+            alignItems:'center',
+            // justifyContent:'space-around',
+        },
+        scroll:{
+            minHeight:420
+        },
+        tt1:{
+            width:(Dimensions.get('window').width-20)/4,
+            textAlign:'center'
+        },
+        ttb1:{
+            padding:20,
+            paddingTop:0,
+            paddingBottom:0
+        },
+        t1:{
+            backgroundColor:'#eee',
+        },
+        t2:{
+            backgroundColor:'#f8f8f8'
+        }
+    })
+    const goDetail = (i:string|number,d:string) => {
+        console.log(i,d)
+    }
+    return (
+        <View style={sty.con}>
+        <View style={[sty.t,sty.t1]}>
+            {['平台账号','获得奖励','社群账号','日志'].map(((it,i)=>
+                <Text style={sty.tt1} key={i}>{it}</Text>))}
+        </View>
+            <ScrollView style={sty.scroll}>
+                {
+                    d.map(it=><View key={it.id} style={[sty.t,sty.t2]}>
+                        {Array.from({length:4}).map((_,i)=>
+                            i>=2?<View style={[sty.tt1,sty.ttb1]}>
+                                    <Button size='tiny' onPress={()=>goDetail(it.id,keys[i])}>详情</Button>
+                                </View>:
+                                // @ts-ignore
+                                <Text numberOfLines={1} style={sty.tt1}>{it[keys[i]]} {i===1?'THB':''}</Text>
+                        )}
+                    </View>)
+                }
+            </ScrollView>
+        <View style={[sty.t,sty.t1]}>
+            <Text>总计：  {d.reduce((p,c)=>p+=c.num,0)} THB</Text>
+        </View>
+    </View>)
+}
+const InferiorMain = () => {
+    const [barIndex,setBarIndex]=useState(0)
+    const [targetArr,setTargetArr]=useState(ITargetData)
+    const style=StyleSheet.create({
+        main:{
+          height:550
+        },
+        content:{
+            marginTop:5,
+        }
+    })
+    return (<View style={style.main}>
+        <TabBar
+            selectedIndex={barIndex}
+            onSelect={index => setBarIndex(index)}
+        >
+            <Tab title='本日' />
+            <Tab title='昨日' />
+            <Tab title='本月' />
+        </TabBar>
+        <View style={style.content}>
+            <ITarget d={targetArr}/>
+        </View>
+    </View>)
+}
 const Inferior = () => {
     return (
         <SafeView>
             <Duplicate/>
+            <InferiorMain/>
         </SafeView>
     );
 };
