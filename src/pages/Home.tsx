@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, Button, Alert} from 'react-native';
+import {View, Text, Button, Alert, Image} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Target from "./home/Target.tsx";
 import Explain from "./home/Explain.tsx";
@@ -21,22 +21,20 @@ const topBtn=(t:string)=>({
     headerTitleAlign: 'center',
     headerTintColor: '#fff',
 })
+const iconImage:Record<string, any[]>={
+    Target:[require('../static/images/target.png')],
+    Explain:[require('../static/images/explain.png')],
+    Inferior:[require('../static/images/inferior.png')],
+    Account:[require('../static/images/account.png')],
+}
 const Home = createBottomTabNavigator({
     screenOptions: ({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            if (route.name === 'Home') {
-                iconName = focused
-                    ? 'ios-information-circle'
-                    : 'ios-information-circle-outline';
-            } else if (route.name === 'Settings') {
-                iconName = focused ? 'ios-list' : 'ios-list-outline';
-            }
             // You can return any component that you like here!
-            return <Text>11</Text>;
+            return <Image source={iconImage[route.name][0]}/>;
         },
         tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
+        tabBarInactiveTintColor: 'orange',
     }),
     screens: {
         Target:{
