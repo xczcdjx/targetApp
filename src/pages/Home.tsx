@@ -6,21 +6,23 @@ import Explain from "./home/Explain.tsx";
 import Inferior from "./home/Inferior.tsx";
 import Account from "./home/Account.tsx";
 import {navigator} from "../constants";
-const topBtn=(t:string)=>({
-    headerRight: () => (
-        <Text style={{color:'#fff',marginRight:15}} onPress={()=>{
-            console.log(111)
-        }}>语言</Text>
-    ),
-    title:t,
-    navigationBarHidden: true,
-    autoHideHomeIndicator: true,
-    headerStyle: {
-        backgroundColor: navigator.background,
-    },
-    headerTitleAlign: 'center',
-    headerTintColor: '#fff',
-})
+import {LangSelect} from "@/components/LangSelect.tsx";
+import {RenHeader} from "@/components/RenHeader.tsx";
+const topBtn=(tit:string)=>{
+    return {
+        headerRight: () => (
+            <LangSelect/>
+        ),
+        headerTitle:()=>RenHeader(tit),
+        navigationBarHidden: true,
+        autoHideHomeIndicator: true,
+        headerStyle: {
+            backgroundColor: navigator.background,
+        },
+        headerTitleAlign: 'center',
+        headerTintColor: '#fff',
+    }
+}
 const iconImage:Record<string, any[]>={
     Target:[require('../static/images/target.png')],
     Explain:[require('../static/images/explain.png')],
@@ -40,25 +42,25 @@ const Home = createBottomTabNavigator({
         Target:{
             screen:Target,
             options:{
-                ...topBtn('任务') as any,
+                ...topBtn('Target') as any,
             }
         },
         Explain:{
             screen:Explain,
             options:{
-                ...topBtn('说明') as any,
+                ...topBtn('Explain') as any,
             }
         },
         Inferior:{
             screen:Inferior,
             options:{
-                ...topBtn('下级') as any,
+                ...topBtn('Inferior') as any,
             }
         },
         Account:{
             screen:Account,
             options:{
-                ...topBtn('我的') as any,
+                ...topBtn('Account') as any,
             }
         }
     },
