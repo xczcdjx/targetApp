@@ -1,7 +1,9 @@
-import {Dimensions, Image, StyleSheet, Text, View} from "react-native";
+import {Button, Dimensions, Image, StyleSheet, Text, View} from "react-native";
 import {Text as UText} from "@ui-kitten/components";
 import SafeView from "@/layout/SafeView.tsx";
 import React, {FC} from "react";
+import {useTranslation} from "react-i18next";
+import {changeLanguage} from "../../static/langs";
 
 type CardProps = {
     i: number,
@@ -43,10 +45,14 @@ const cardStyle = StyleSheet.create({
     }
 })
 const Explain = () => {
+    const { t, i18n } = useTranslation();
     return (
         <SafeView>
+            <Button title={t('tit')} onPress={()=>{
+                changeLanguage('en')
+            }}/>
             {Array.from({length: 5}).map(((_, i) =>
-                <Card key={i} i={i + 1} tit={'标题xxxxx'}
+                <Card key={i} i={i + 1} tit={t('tit')}
                       content={'The JavaScript console is an essential tool for web development. Learn new and fun ways to use the console to display data and debug your'}/>))}
         </SafeView>
     );
