@@ -12,6 +12,7 @@ module.exports = {
           '@/layout': './src/layout',
           '@/constants': './src/constants',
           '@/utils': './src/utils',
+          '@/images': './src/static/images',
         },
       },
     ]
