@@ -1,12 +1,12 @@
 import {Clipboard, Dimensions, ScrollView, StyleSheet, Text, View} from "react-native";
-import React, {Component, FC, useState} from "react";
+import React, {Component, FC, useId, useState} from "react";
 import SafeView from "@/layout/SafeView.tsx";
 import {Button, Card, Icon, Input, Modal, Tab, TabBar} from "@ui-kitten/components";
 import {GeneStyle} from "@/utils/style.ts";
 import {Text as UText} from '@ui-kitten/components'
 import {useNavigation} from "@react-navigation/native";
 const ITargetData:ITargetProps[]=[
-    ...Array(30).fill(0).map((_,i)=>({
+    ...Array(50).fill(0).map((_,i)=>({
         id:i+1,
         acc:'Millie Gregory'+i,
         num:Math.floor(Math.random()*1000+1),
@@ -37,6 +37,7 @@ class Duplicate extends Component{
 }
 const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
     const navigation=useNavigation()
+    const uniqueId=useId()
     const keys=['acc','num','d1','d2']
     const [visible, setVisible] = React.useState(false);
     const sty=GeneStyle({
@@ -55,7 +56,7 @@ const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
             // justifyContent:'space-around',
         },
         scroll:{
-            minHeight:420
+            minHeight:420,
         },
         tt1:{
             width:(Dimensions.get('window').width-20)/4,
@@ -109,11 +110,11 @@ const ITarget:FC<{d:ITargetProps[]}>=({d})=>{
                 {
                     d.map(it=><View key={it.id} style={[sty.t,sty.t2]}>
                         {Array.from({length:4}).map((_,i)=>
-                            i>=2?<View style={[sty.tt1,sty.ttb1]}>
+                            i>=2?<View style={[sty.tt1,sty.ttb1]} key={uniqueId+i}>
                                     <Button size='tiny' onPress={()=>goDetail(it.id,keys[i])}>详情</Button>
                                 </View>:
                                 // @ts-ignore
-                                <Text numberOfLines={1} style={sty.tt1}>{it[keys[i]]} {i===1?'THB':''}</Text>
+                                <Text numberOfLines={1} key={uniqueId+i} style={sty.tt1}>{it[keys[i]]} {i===1?'THB':''}</Text>
                         )}
                     </View>)
                 }

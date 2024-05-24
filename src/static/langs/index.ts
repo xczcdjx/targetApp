@@ -27,6 +27,8 @@ i18next
     .use(languageDetector)
     .use(initReactI18next)
     .init({
+        compatibilityJSON: 'v3',
+        load: 'languageOnly',
         fallbackLng: 'zh', // 切换语言失败时的使用的语言
         debug: __DEV__, // 开发环境开启调试
         // 资源文件

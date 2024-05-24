@@ -7,12 +7,13 @@ import storage from "@/utils/storage.ts";
 export const LangSelect = (): React.ReactElement => {
     const [visible, setVisible] = React.useState(false);
     const {t,i18n}=useTranslation()
-    const [lang,setLang]=useState<string[]>([])
+    const [lang,setLang]=useState<string[]>(['zh','en'])
     const [selectIndex,setSelectIndex]=useState({row:0})
     useEffect(() => {
         // setLang(i18n.languages as string[])
-        setLang(['zh','en'])
+        // setLang(['zh','en'])
         storage.load({key:lngKey}).then(v=>{
+            // console.log(v,1111112)
             setSelectIndex({row: lang.findIndex(it=>it===v)})
         })
     }, []);
