@@ -15,12 +15,22 @@ const topBtn=(t:string)=>({
     headerTintColor: '#fff',
 })
 const router = createNativeStackNavigator({
-    initialRouteName:'Home',
+    initialRouteName:'Login',
     screens:{
         Login:{
             screen:Login,
             options:{
-                ...topBtn('登录') as any
+                ...topBtn('登录') as any,
+                // statusBarBackgroundColor:'transparent',
+                headerStyle: {
+                    backgroundColor: 'transparent',
+                },
+                navigationBarColor:'transparent',
+                headerShadowVisible:true, // ios支持
+                headerShown:false,// android 去掉顶部样式
+                headerBackVisible:false,
+                headerTransparent:true,
+
             }
         },
         Home:{

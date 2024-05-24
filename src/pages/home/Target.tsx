@@ -23,7 +23,7 @@ const Target = () => {
         <View>
             <TopTabBar barIndex={barIndex} setBarIndex={setBarIndex}/>
             {barIndex===0?<ScrollView>
-                {Array.from({length:100}).map((it,i)=><Text key={i}>{i}</Text>)}
+                {Array.from({length:10}).map((it,i)=><Text key={i}>{i}</Text>)}
                 <Button title={'退出登录'} onPress={()=>navigate.popTo('Login')}/>
             </ScrollView>:<ScrollView>
                 <Text>none</Text>

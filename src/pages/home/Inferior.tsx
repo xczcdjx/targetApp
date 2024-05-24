@@ -6,7 +6,7 @@ import {GeneStyle} from "@/utils/style.ts";
 import {Text as UText} from '@ui-kitten/components'
 import {useNavigation} from "@react-navigation/native";
 const ITargetData:ITargetProps[]=[
-    ...Array(50).fill(0).map((_,i)=>({
+    ...Array(10).fill(0).map((_,i)=>({
         id:i+1,
         acc:'Millie Gregory'+i,
         num:Math.floor(Math.random()*1000+1),
